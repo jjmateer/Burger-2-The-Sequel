@@ -15,20 +15,20 @@ $(function () {
       }
     );
   });
-  $(".change-devoured").on("click", function (event) {
-    var id = $(this).data("id");
-    var newDevoured = $(this).data("devoured");
+  // $(".change-devoured").on("click", function (event) {
+  //   var id = $(this).data("id");
+  //   var newDevoured = $(this).data("devoured");
 
-    var DevouredState = {
-      devoured: newDevoured
-    };
-    $.ajax("/api/burgers/" + id, {
-      type: "PUT"
-    }).then(
-      function () {
-        console.log("changed sleep to", newDevoured);
-        location.reload();
-      }
-    );
-  });
+  //   var DevouredState = {
+  //     devoured: newDevoured
+  //   };
+  //   $.ajax("/api/burgers/" + id, {
+  //     type: "PUT"
+  //   }).then(
+  //     function () {
+  //       console.log("changed devoured to", newDevoured);
+  //       location.reload();
+  //     }
+  //   );
+  // });
 });
