@@ -1,13 +1,14 @@
-$(function () {
+$(document).ready(function () {
   $(".create-form").on("submit", function (event) {
     event.preventDefault();
-    var newBurger = {
-      burger_name: $("#burgerInput").val().trim(),
-      devoured: 0
-    };
-    $.ajax("/api/burgers", {
+    // var newBurger = {
+    //   burger_name: $("#burgerInput").val().trim(),
+    //   devoured: false
+    // };
+    $.post("/api/burgers", {
       type: "POST",
-      data: newBurger
+      burger_name: $("#burgerInput").val().trim(),
+      devoured: false
     }).then(
       function () {
         console.log("created new burger");
@@ -15,12 +16,18 @@ $(function () {
       }
     );
   });
-  $(".change-devoured").on("click", function (event) {
+    $(".change-devoured").on("click", function (event) {
+      event.preventDefault();
     var id = $(this).data("id");
-    $.ajax("/api/burgers/", {
-      type: "PUT"
+    // var newdevoured = $(this).data("devoured");
+    console.log(id)
+    $.ajax("/api/burgers/" + id, {
+      method: "PUT",
+      data: {
+        devoured: true
+      }
     }).then(
-      function () {
+      function() {
         location.reload();
       }
     );

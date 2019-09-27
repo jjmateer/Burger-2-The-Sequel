@@ -1,5 +1,4 @@
 var db = require("../models");
-
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
@@ -14,21 +13,26 @@ module.exports = function (app) {
         throw (err)
       });
   });
-  app.post("/api/burgers", function (req, res) {
+  app.post("/api/burgers/", function (req, res) {
+    console.log(req.body)
     db.Burgers.create({
-      id: req.body.id
-    }).then(function (data) {
-      console.log(data)
-      res.redirect("/");
-    });
+      burger_name: req.body.burger_name,
+      devoured: false
+    })
+      .then(function (updatedBurger) {
+        res.json(updatedBurger)
+      });
   });
 
-  app.put("api/burgers", function (req, res) {
+  app.put("api/burgers/:id", function (req, res) {
     db.Burgers.update({
-      where: { devoured: req.body.devoured }
-    }).then(function (cb) {
-      console.log(req.body.devoured)
-      console.log(cb)
+      devoured: true
+    }, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function (updatedBurger) {
+      res.json(updatedBurger);
     })
   })
 };
