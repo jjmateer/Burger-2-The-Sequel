@@ -2,25 +2,24 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-
   app.get("/", function (req, res) {
-    db.Burgers.findAll({}).then(function(dbBurgers) {
-      let hbsObject = {
-        burgers: dbBurgers
+    db.Burgers.findAll({}).then(function(data) {
+      let dbBurgers = {
+        Burgers: data
       };
-      res.render("index", hbsObject);
+      res.render("index", dbBurgers);
+      console.log(dbBurgers)
     })
       .catch(function (err) {
-        res.json({ status: "ERROR", message: err });
+        throw(err)
       });
   });
-  app.post("/api/burgers", function (req, res) {
-    db.Burgers.create(req.body).then(function (data) {
-      res.json(data);
+  app.post("/api/Burgers", function (req, res) {
+    db.Burgers.create({
+      burger_name: req.body.burger_name
+    }).then(function(data) {
+      res.redirect("/");
     });
-  });
-
-  app.put("/api/burgers", function (req, res) {
-
-  });
+});
+  
 };

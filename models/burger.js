@@ -1,16 +1,20 @@
 module.exports = function (sequelize, DataTypes) {
   var Burgers = sequelize.define('Burgers', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     burger_name: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     devoured: {
       type: DataTypes.BOOLEAN,
-      defaultValue: 0,
+      defaultValue: false,
+      allowNull: false
     }
   },
     {
-      timestamps: true,
+      timestamps: false,
       createdAt: "createdAt",
       updatedAt: "updatedAt",
       deletedAt: false

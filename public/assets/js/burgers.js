@@ -15,20 +15,14 @@ $(function () {
       }
     );
   });
-  // $(".change-devoured").on("click", function (event) {
-  //   var id = $(this).data("id");
-  //   var newDevoured = $(this).data("devoured");
-
-  //   var DevouredState = {
-  //     devoured: newDevoured
-  //   };
-  //   $.ajax("/api/burgers/" + id, {
-  //     type: "PUT"
-  //   }).then(
-  //     function () {
-  //       console.log("changed devoured to", newDevoured);
-  //       location.reload();
-  //     }
-  //   );
-  // });
+  $(".change-devoured").on("click", function (event) {
+    var id = $(this).data("id");
+    $.ajax("/api/burgers/", {
+      type: "PUT"
+    }).then(
+      function () {
+        location.reload();
+      }
+    );
+  });
 });
