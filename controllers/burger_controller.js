@@ -24,15 +24,19 @@ module.exports = function (app) {
       });
   });
 
-  app.put("api/burgers/:id", function (req, res) {
+  app.put("/api/burgers/:id", function(req, res) {
+
     db.Burgers.update({
-      devoured: true
-    }, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function (updatedBurger) {
-      res.json(updatedBurger);
-    })
-  })
+        devoured: true
+      }, {
+        where: {
+          id: req.params.id
+        }
+    }).then(function (updatedBurger, err) {
+        res.json(updatedBurger);
+        if (err) {
+          console.log(err)
+        }
+      })
+})
 };
