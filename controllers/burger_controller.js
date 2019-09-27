@@ -3,23 +3,32 @@ var db = require("../models");
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
-    db.Burgers.findAll({}).then(function(data) {
+    db.Burgers.findAll({}).then(function (data) {
       let dbBurgers = {
         Burgers: data
       };
       res.render("index", dbBurgers);
-      console.log(dbBurgers)
+      // console.log(dbBurgers)
     })
       .catch(function (err) {
-        throw(err)
+        throw (err)
       });
   });
-  app.post("/api/Burgers", function (req, res) {
+  app.post("/api/burgers", function (req, res) {
     db.Burgers.create({
-      burger_name: req.body.burger_name
-    }).then(function(data) {
+      id: req.body.id
+    }).then(function (data) {
+      console.log(data)
       res.redirect("/");
     });
-});
-  
+  });
+
+  app.put("api/burgers", function (req, res) {
+    db.Burgers.update({
+      where: { devoured: req.body.devoured }
+    }).then(function (cb) {
+      console.log(req.body.devoured)
+      console.log(cb)
+    })
+  })
 };

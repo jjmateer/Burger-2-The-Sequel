@@ -3,25 +3,26 @@
 <div class="container">
   <ul id="dev">
     <h2> Not Devoured</h2>
-    <li>
     {{#each Burgers}}
       {{#unless devoured}}
+    <li>
       {{burger_name}}
       <button class="change-devoured" data-id="{{id}}" data-newdevoured="{{devoured}}">
         Devour
       </button>
+    </li>
       {{/unless}}
     {{/each}}
-    </li>
   </ul>
   <ul>
     <h2>Devoured</h2>
-    <li>
     {{#each Burgers}}
       {{#if devoured}}
+    <li>
+      {{burger_name}}
+    </li>
       {{/if}}
       {{/each}}
-    </li>
   </ul>
 
 </div>
